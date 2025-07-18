@@ -1,0 +1,132 @@
+# AutoDoc Agent 默认配置文件
+# 复制此文件为 .autodoc.yaml 并根据需要修改
+
+# LLM 提供商配置
+llm:
+  # 默认提供商: openai, claude, ollama
+  default_provider: "openai"
+
+  # OpenAI 配置
+  openai:
+    api_key: "" # 从环境变量 OPENAI_API_KEY 或 keyring 获取
+    model: "gpt-4"
+    temperature: 0.1
+    max_tokens: 4000
+
+  # Claude 配置
+  claude:
+    api_key: "" # 从环境变量 ANTHROPIC_API_KEY 或 keyring 获取
+    model: "claude-3-sonnet-20240229"
+    temperature: 0.1
+    max_tokens: 4000
+
+  # Ollama 配置
+  ollama:
+    base_url: "http://localhost:11434"
+    model: "codellama:7b"
+    temperature: 0.1
+
+# AST 解析器配置
+ast_parser:
+  # 支持的编程语言
+  supported_languages:
+    - python
+    - go
+    - java
+    - typescript
+    - javascript
+
+  # 缓存配置
+  cache:
+    enabled: true
+    ttl: 3600 # 缓存时间（秒）
+    max_size: 1000 # 最大缓存条目数
+
+  # 解析深度限制
+  max_depth: 10
+  max_file_size: 1048576 # 1MB
+
+# 文档生成配置
+documentation:
+  # 输出格式
+  output_format: "markdown"
+
+  # 模板配置
+  templates:
+    readme: "default"
+    api_docs: "default"
+    changelog: "default"
+
+  # 内容配置
+  content:
+    include_examples: true
+    include_diagrams: true
+    include_changelog: true
+    language: "zh-CN" # 文档语言
+
+  # Mermaid 图表配置
+  mermaid:
+    enabled: true
+    theme: "default"
+
+# Git 集成配置
+git:
+  # 自动提交配置
+  auto_commit: true
+  commit_message_template: "docs: 自动更新文档 [skip ci]"
+
+  # 分支配置
+  target_branch: "main"
+  create_pr: true
+  pr_title_template: "docs: 自动更新文档"
+  pr_body_template: "此PR包含自动生成的文档更新"
+
+  # 跳过机制
+  skip_keywords:
+    - "[skip-autodoc]"
+    - "[no-docs]"
+
+# 日志配置
+logging:
+  level: "INFO" # DEBUG, INFO, WARNING, ERROR
+  format: "json" # json, text
+  output: "stderr" # stderr, file
+
+  # 文件日志配置
+  file:
+    enabled: false
+    path: "autodoc.log"
+    max_size: 10485760 # 10MB
+    backup_count: 5
+
+# 性能配置
+performance:
+  # 并发处理
+  max_workers: 4
+  max_concurrent_requests: 10
+
+  # 请求限制
+  rate_limit:
+    requests_per_minute: 60
+    requests_per_hour: 1000
+
+  # 超时配置
+  timeouts:
+    request: 30
+    parse: 60
+    generate: 120
+
+# 安全配置
+security:
+  # API 密钥存储
+  keyring:
+    enabled: true
+    service_name: "autodoc-agent"
+
+  # 敏感信息过滤
+  filter_sensitive_data: true
+  sensitive_patterns:
+    - "password"
+    - "secret"
+    - "token"
+    - "key"
