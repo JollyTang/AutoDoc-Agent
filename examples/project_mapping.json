@@ -1,0 +1,729 @@
+{
+  "project_path": "/home/jolly/code/python/autodoc-agent",
+  "total_files": 24,
+  "total_lines": 7363,
+  "language_stats": {
+    "python": 24
+  },
+  "modules": {
+    "/home/jolly/code/python/autodoc-agent/tests/test_ast_parser.py": {
+      "module_name": "test_ast_parser",
+      "language": "python",
+      "dependencies": [
+        "pytest",
+        "tempfile",
+        "os",
+        "pathlib.Path",
+        "src.core.ast_parser.PythonASTParser",
+        "src.core.ast_parser.parse_python_file",
+        "src.core.ast_parser.parse_python_source",
+        "src.core.ast_parser.parse_python_directory",
+        "src.core.ast_parser.ModuleInfo",
+        "src.core.ast_parser.FunctionInfo",
+        "src.core.ast_parser.ClassInfo",
+        "src.core.language_detector.Language"
+      ],
+      "dependents": [],
+      "exports": [
+        "TestPythonASTParser",
+        "TestASTParserFunctions",
+        "TestASTParserEdgeCases"
+      ],
+      "imports": [
+        "pytest",
+        "tempfile",
+        "os"
+      ],
+      "line_count": 424,
+      "complexity_score": 79.9,
+      "last_modified": 1752861509.803033
+    },
+    "/home/jolly/code/python/autodoc-agent/tests/__init__.py": {
+      "module_name": "__init__",
+      "language": "python",
+      "dependencies": [],
+      "dependents": [],
+      "exports": [],
+      "imports": [],
+      "line_count": 5,
+      "complexity_score": 0.5,
+      "last_modified": 1752860742.7430432
+    },
+    "/home/jolly/code/python/autodoc-agent/tests/test_cli_commands.py": {
+      "module_name": "test_cli_commands",
+      "language": "python",
+      "dependencies": [
+        "pytest",
+        "typer.testing.CliRunner",
+        "src.cli.commands.app"
+      ],
+      "dependents": [],
+      "exports": [
+        "runner",
+        "test_app_version",
+        "test_app_help",
+        "test_init_command",
+        "test_init_command_force",
+        "test_update_command",
+        "test_update_command_with_path",
+        "test_update_command_force",
+        "test_update_command_dry_run",
+        "test_config_command_show",
+        "test_config_command_set",
+        "test_config_command_get",
+        "test_config_command_reset",
+        "test_config_command_invalid",
+        "test_status_command"
+      ],
+      "imports": [
+        "pytest"
+      ],
+      "line_count": 113,
+      "complexity_score": 41.8,
+      "last_modified": 1752860757.9430382
+    },
+    "/home/jolly/code/python/autodoc-agent/tests/test_language_detector.py": {
+      "module_name": "test_language_detector",
+      "language": "python",
+      "dependencies": [
+        "pytest",
+        "tempfile",
+        "os",
+        "pathlib.Path",
+        "src.core.language_detector.Language",
+        "src.core.language_detector.LanguageDetector",
+        "src.core.language_detector.detect_language",
+        "src.core.language_detector.detect_languages_in_directory",
+        "src.core.language_detector.get_supported_languages"
+      ],
+      "dependents": [],
+      "exports": [
+        "TestLanguageDetector",
+        "TestLanguageDetectorFunctions"
+      ],
+      "imports": [
+        "pytest",
+        "tempfile",
+        "os"
+      ],
+      "line_count": 330,
+      "complexity_score": 73.5,
+      "last_modified": 1752862955.0830479
+    },
+    "/home/jolly/code/python/autodoc-agent/tests/test_go_ast_parser.py": {
+      "module_name": "test_go_ast_parser",
+      "language": "python",
+      "dependencies": [
+        "pytest",
+        "tempfile",
+        "os",
+        "pathlib.Path",
+        "src.core.go_ast_parser.GoASTParser",
+        "src.core.go_ast_parser.parse_go_file",
+        "src.core.go_ast_parser.parse_go_source",
+        "src.core.go_ast_parser.parse_go_directory",
+        "src.core.go_ast_parser.GoModuleInfo",
+        "src.core.go_ast_parser.GoFunctionInfo",
+        "src.core.go_ast_parser.GoStructInfo",
+        "src.core.go_ast_parser.GoInterfaceInfo",
+        "src.core.language_detector.Language"
+      ],
+      "dependents": [],
+      "exports": [
+        "TestGoASTParser",
+        "TestGoASTParserFunctions",
+        "TestGoASTParserEdgeCases"
+      ],
+      "imports": [
+        "pytest",
+        "tempfile",
+        "os"
+      ],
+      "line_count": 457,
+      "complexity_score": 83.2,
+      "last_modified": 1752895741.8328414
+    },
+    "/home/jolly/code/python/autodoc-agent/examples/module_mapper_demo.py": {
+      "module_name": "module_mapper_demo",
+      "language": "python",
+      "dependencies": [
+        "sys",
+        "json",
+        "traceback",
+        "pathlib.Path",
+        "src.core.module_mapper.generate_project_mapping",
+        "src.core.module_mapper.export_mapping_to_json",
+        "src.core.module_mapper.ModuleMapper"
+      ],
+      "dependents": [],
+      "exports": [
+        "demo_basic_usage",
+        "demo_module_analysis",
+        "demo_dependency_analysis",
+        "demo_json_export",
+        "demo_complexity_analysis",
+        "main"
+      ],
+      "imports": [
+        "sys",
+        "json",
+        "traceback"
+      ],
+      "line_count": 199,
+      "complexity_score": 33.4,
+      "last_modified": 1752911705.503272
+    },
+    "/home/jolly/code/python/autodoc-agent/src/__init__.py": {
+      "module_name": "__init__",
+      "language": "python",
+      "dependencies": [],
+      "dependents": [],
+      "exports": [],
+      "imports": [],
+      "line_count": 0,
+      "complexity_score": 0.0,
+      "last_modified": 1752860439.6730325
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/ast_parser.py": {
+      "module_name": "ast_parser",
+      "language": "python",
+      "dependencies": [
+        "ast",
+        "libcst",
+        "logging",
+        "libcst.metadata.MetadataWrapper",
+        "libcst.metadata.QualifiedNameProvider",
+        "libcst.metadata.ParentNodeProvider",
+        "libcst.metadata.PositionProvider",
+        "typing.Dict",
+        "typing.List",
+        "typing.Optional",
+        "typing.Set",
+        "typing.Tuple",
+        "typing.Any",
+        "typing.Union",
+        "dataclasses.dataclass",
+        "dataclasses.field",
+        "pathlib.Path",
+        "language_detector.Language",
+        "language_detector.detect_language"
+      ],
+      "dependents": [],
+      "exports": [
+        "parse_python_file",
+        "parse_python_source",
+        "parse_python_directory",
+        "FunctionInfo",
+        "ClassInfo",
+        "ModuleInfo",
+        "PythonASTParser",
+        "PythonASTVisitor"
+      ],
+      "imports": [
+        "ast",
+        "libcst",
+        "logging"
+      ],
+      "line_count": 489,
+      "complexity_score": 95.4,
+      "last_modified": 1752863361.6929655
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/__init__.py": {
+      "module_name": "__init__",
+      "language": "python",
+      "dependencies": [],
+      "dependents": [],
+      "exports": [],
+      "imports": [],
+      "line_count": 0,
+      "complexity_score": 0.0,
+      "last_modified": 1752860439.6730325
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/language_detector.py": {
+      "module_name": "language_detector",
+      "language": "python",
+      "dependencies": [
+        "os",
+        "re",
+        "pathlib.Path",
+        "typing.Dict",
+        "typing.List",
+        "typing.Optional",
+        "typing.Set",
+        "typing.Tuple",
+        "enum.Enum"
+      ],
+      "dependents": [],
+      "exports": [
+        "detect_language",
+        "detect_languages_in_directory",
+        "get_supported_languages",
+        "Language",
+        "LanguageDetector"
+      ],
+      "imports": [
+        "os",
+        "re"
+      ],
+      "line_count": 355,
+      "complexity_score": 68.0,
+      "last_modified": 1752861317.7932057
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/java_ast_parser.py": {
+      "module_name": "java_ast_parser",
+      "language": "python",
+      "dependencies": [
+        "ast",
+        "re",
+        "logging",
+        "typing.Dict",
+        "typing.List",
+        "typing.Optional",
+        "typing.Set",
+        "typing.Tuple",
+        "typing.Any",
+        "typing.Union",
+        "dataclasses.dataclass",
+        "dataclasses.field",
+        "pathlib.Path",
+        "tree_sitter.Language",
+        "tree_sitter.Parser",
+        "tree_sitter.Node",
+        "language_detector.Language",
+        "language_detector.detect_language"
+      ],
+      "dependents": [],
+      "exports": [
+        "parse_java_file",
+        "parse_java_source",
+        "parse_java_directory",
+        "JavaMethodInfo",
+        "JavaFieldInfo",
+        "JavaClassInfo",
+        "JavaModuleInfo",
+        "JavaASTParser",
+        "JavaASTVisitor"
+      ],
+      "imports": [
+        "ast",
+        "re",
+        "logging"
+      ],
+      "line_count": 870,
+      "complexity_score": 151.5,
+      "last_modified": 1752908830.3238688
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/module_mapper.py": {
+      "module_name": "module_mapper",
+      "language": "python",
+      "dependencies": [
+        "os",
+        "logging",
+        "pathlib.Path",
+        "typing.Dict",
+        "typing.List",
+        "typing.Optional",
+        "typing.Set",
+        "typing.Tuple",
+        "typing.Any",
+        "typing.Union",
+        "dataclasses.dataclass",
+        "dataclasses.field",
+        "collections.defaultdict",
+        "language_detector.Language",
+        "language_detector.detect_language",
+        "ast_parser.ModuleInfo",
+        "go_ast_parser.GoModuleInfo",
+        "java_ast_parser.JavaModuleInfo",
+        "typescript_ast_parser.TypeScriptModuleInfo"
+      ],
+      "dependents": [],
+      "exports": [
+        "generate_project_mapping",
+        "export_mapping_to_json",
+        "ModuleMapping",
+        "ProjectMapping",
+        "ModuleMapper"
+      ],
+      "imports": [
+        "os",
+        "logging"
+      ],
+      "line_count": 544,
+      "complexity_score": 98.4,
+      "last_modified": 1752911750.1328866
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/typescript_ast_parser.py": {
+      "module_name": "typescript_ast_parser",
+      "language": "python",
+      "dependencies": [
+        "re",
+        "logging",
+        "typing.Dict",
+        "typing.List",
+        "typing.Optional",
+        "typing.Set",
+        "typing.Tuple",
+        "typing.Any",
+        "typing.Union",
+        "dataclasses.dataclass",
+        "dataclasses.field",
+        "pathlib.Path",
+        "tree_sitter.Language",
+        "tree_sitter.Parser",
+        "tree_sitter.Node",
+        "language_detector.Language",
+        "language_detector.detect_language"
+      ],
+      "dependents": [],
+      "exports": [
+        "parse_typescript_file",
+        "parse_typescript_source",
+        "parse_typescript_directory",
+        "TypeScriptFunctionInfo",
+        "TypeScriptPropertyInfo",
+        "TypeScriptInterfaceInfo",
+        "TypeScriptClassInfo",
+        "TypeScriptTypeInfo",
+        "TypeScriptEnumInfo",
+        "TypeScriptModuleInfo",
+        "TypeScriptASTParser",
+        "TypeScriptASTVisitor"
+      ],
+      "imports": [
+        "re",
+        "logging"
+      ],
+      "line_count": 919,
+      "complexity_score": 164.9,
+      "last_modified": 1752910357.5179987
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/go_ast_parser.py": {
+      "module_name": "go_ast_parser",
+      "language": "python",
+      "dependencies": [
+        "tree_sitter",
+        "logging",
+        "tree_sitter.Language",
+        "tree_sitter.Parser",
+        "typing.Dict",
+        "typing.List",
+        "typing.Optional",
+        "typing.Set",
+        "typing.Tuple",
+        "typing.Any",
+        "typing.Union",
+        "dataclasses.dataclass",
+        "dataclasses.field",
+        "pathlib.Path",
+        "language_detector.Language",
+        "language_detector.detect_language"
+      ],
+      "dependents": [],
+      "exports": [
+        "parse_go_file",
+        "parse_go_source",
+        "parse_go_directory",
+        "GoFunctionInfo",
+        "GoStructInfo",
+        "GoInterfaceInfo",
+        "GoModuleInfo",
+        "GoASTParser",
+        "GoASTVisitor"
+      ],
+      "imports": [
+        "tree_sitter",
+        "logging"
+      ],
+      "line_count": 599,
+      "complexity_score": 108.9,
+      "last_modified": 1752895702.90284
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/test_java_ast_parser.py": {
+      "module_name": "test_java_ast_parser",
+      "language": "python",
+      "dependencies": [
+        "pytest",
+        "tempfile",
+        "os",
+        "pathlib.Path",
+        "typing.Optional",
+        "java_ast_parser.JavaASTParser",
+        "java_ast_parser.JavaModuleInfo",
+        "java_ast_parser.JavaClassInfo",
+        "java_ast_parser.JavaMethodInfo",
+        "java_ast_parser.JavaFieldInfo",
+        "java_ast_parser.parse_java_file",
+        "java_ast_parser.parse_java_source",
+        "java_ast_parser.parse_java_directory",
+        "language_detector.Language"
+      ],
+      "dependents": [],
+      "exports": [
+        "TestJavaASTParser",
+        "TestJavaASTParserConvenienceFunctions"
+      ],
+      "imports": [
+        "pytest",
+        "tempfile",
+        "os"
+      ],
+      "line_count": 532,
+      "complexity_score": 87.7,
+      "last_modified": 1752908236.7994277
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/test_module_mapper.py": {
+      "module_name": "test_module_mapper",
+      "language": "python",
+      "dependencies": [
+        "pytest",
+        "tempfile",
+        "os",
+        "json",
+        "pathlib.Path",
+        "typing.Optional",
+        "module_mapper.ModuleMapper",
+        "module_mapper.ModuleMapping",
+        "module_mapper.ProjectMapping",
+        "module_mapper.generate_project_mapping",
+        "module_mapper.export_mapping_to_json",
+        "language_detector.Language"
+      ],
+      "dependents": [],
+      "exports": [
+        "TestModuleMapper",
+        "TestModuleMapperIntegration"
+      ],
+      "imports": [
+        "pytest",
+        "tempfile",
+        "os",
+        "json"
+      ],
+      "line_count": 496,
+      "complexity_score": 83.1,
+      "last_modified": 1752911543.962965
+    },
+    "/home/jolly/code/python/autodoc-agent/src/core/test_typescript_ast_parser.py": {
+      "module_name": "test_typescript_ast_parser",
+      "language": "python",
+      "dependencies": [
+        "pytest",
+        "tempfile",
+        "os",
+        "pathlib.Path",
+        "typing.Optional",
+        "typescript_ast_parser.TypeScriptASTParser",
+        "typescript_ast_parser.TypeScriptModuleInfo",
+        "typescript_ast_parser.TypeScriptClassInfo",
+        "typescript_ast_parser.TypeScriptInterfaceInfo",
+        "typescript_ast_parser.TypeScriptFunctionInfo",
+        "typescript_ast_parser.TypeScriptPropertyInfo",
+        "typescript_ast_parser.TypeScriptTypeInfo",
+        "typescript_ast_parser.TypeScriptEnumInfo",
+        "typescript_ast_parser.parse_typescript_file",
+        "typescript_ast_parser.parse_typescript_source",
+        "typescript_ast_parser.parse_typescript_directory",
+        "language_detector.Language"
+      ],
+      "dependents": [],
+      "exports": [
+        "TestTypeScriptASTParser",
+        "TestTypeScriptASTParserConvenienceFunctions"
+      ],
+      "imports": [
+        "pytest",
+        "tempfile",
+        "os"
+      ],
+      "line_count": 633,
+      "complexity_score": 103.8,
+      "last_modified": 1752910341.6948073
+    },
+    "/home/jolly/code/python/autodoc-agent/src/cli/__init__.py": {
+      "module_name": "__init__",
+      "language": "python",
+      "dependencies": [
+        "typer",
+        "rich.console.Console",
+        "rich.traceback.install",
+        "commands.app"
+      ],
+      "dependents": [],
+      "exports": [],
+      "imports": [
+        "typer"
+      ],
+      "line_count": 20,
+      "complexity_score": 2.5,
+      "last_modified": 1752860721.2530417
+    },
+    "/home/jolly/code/python/autodoc-agent/src/cli/commands.py": {
+      "module_name": "commands",
+      "language": "python",
+      "dependencies": [
+        "typer",
+        "rich.console.Console",
+        "rich.panel.Panel",
+        "rich.text.Text",
+        "typing.Optional"
+      ],
+      "dependents": [],
+      "exports": [
+        "version_callback",
+        "main",
+        "init",
+        "update",
+        "config",
+        "status"
+      ],
+      "imports": [
+        "typer"
+      ],
+      "line_count": 172,
+      "complexity_score": 29.7,
+      "last_modified": 1752860965.1630445
+    },
+    "/home/jolly/code/python/autodoc-agent/src/cli/__main__.py": {
+      "module_name": "__main__",
+      "language": "python",
+      "dependencies": [
+        "commands.app"
+      ],
+      "dependents": [],
+      "exports": [],
+      "imports": [],
+      "line_count": 10,
+      "complexity_score": 1.0,
+      "last_modified": 1752860904.1930425
+    },
+    "/home/jolly/code/python/autodoc-agent/src/llm/__init__.py": {
+      "module_name": "__init__",
+      "language": "python",
+      "dependencies": [],
+      "dependents": [],
+      "exports": [],
+      "imports": [],
+      "line_count": 0,
+      "complexity_score": 0.0,
+      "last_modified": 1752860439.6730325
+    },
+    "/home/jolly/code/python/autodoc-agent/src/utils/__init__.py": {
+      "module_name": "__init__",
+      "language": "python",
+      "dependencies": [],
+      "dependents": [],
+      "exports": [],
+      "imports": [],
+      "line_count": 0,
+      "complexity_score": 0.0,
+      "last_modified": 1752860439.6730325
+    },
+    "/home/jolly/code/python/autodoc-agent/src/docs/__init__.py": {
+      "module_name": "__init__",
+      "language": "python",
+      "dependencies": [],
+      "dependents": [],
+      "exports": [],
+      "imports": [],
+      "line_count": 0,
+      "complexity_score": 0.0,
+      "last_modified": 1752860439.6730325
+    },
+    "/home/jolly/code/python/autodoc-agent/docs/examples/python-simple/src/calculator.py": {
+      "module_name": "calculator",
+      "language": "python",
+      "dependencies": [
+        "math",
+        "typing.Union",
+        "typing.List",
+        "typing.Optional"
+      ],
+      "dependents": [],
+      "exports": [
+        "calculate_expression",
+        "add",
+        "subtract",
+        "multiply",
+        "divide",
+        "Calculator"
+      ],
+      "imports": [
+        "math"
+      ],
+      "line_count": 196,
+      "complexity_score": 48.1,
+      "last_modified": 1752860792.803047
+    }
+  },
+  "dependency_graph": {
+    "/home/jolly/code/python/autodoc-agent/tests/test_ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/tests/__init__.py": [],
+    "/home/jolly/code/python/autodoc-agent/tests/test_cli_commands.py": [],
+    "/home/jolly/code/python/autodoc-agent/tests/test_language_detector.py": [],
+    "/home/jolly/code/python/autodoc-agent/tests/test_go_ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/examples/module_mapper_demo.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/__init__.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/__init__.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/language_detector.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/java_ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/module_mapper.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/typescript_ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/go_ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/test_java_ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/test_module_mapper.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/core/test_typescript_ast_parser.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/cli/__init__.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/cli/commands.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/cli/__main__.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/llm/__init__.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/utils/__init__.py": [],
+    "/home/jolly/code/python/autodoc-agent/src/docs/__init__.py": [],
+    "/home/jolly/code/python/autodoc-agent/docs/examples/python-simple/src/calculator.py": []
+  },
+  "circular_dependencies": [],
+  "unused_modules": [
+    "/home/jolly/code/python/autodoc-agent/tests/test_ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/tests/__init__.py",
+    "/home/jolly/code/python/autodoc-agent/tests/test_cli_commands.py",
+    "/home/jolly/code/python/autodoc-agent/tests/test_language_detector.py",
+    "/home/jolly/code/python/autodoc-agent/tests/test_go_ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/examples/module_mapper_demo.py",
+    "/home/jolly/code/python/autodoc-agent/src/__init__.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/__init__.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/language_detector.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/java_ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/module_mapper.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/typescript_ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/go_ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/test_java_ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/test_module_mapper.py",
+    "/home/jolly/code/python/autodoc-agent/src/core/test_typescript_ast_parser.py",
+    "/home/jolly/code/python/autodoc-agent/src/cli/__init__.py",
+    "/home/jolly/code/python/autodoc-agent/src/cli/commands.py",
+    "/home/jolly/code/python/autodoc-agent/src/cli/__main__.py",
+    "/home/jolly/code/python/autodoc-agent/src/llm/__init__.py",
+    "/home/jolly/code/python/autodoc-agent/src/utils/__init__.py",
+    "/home/jolly/code/python/autodoc-agent/src/docs/__init__.py",
+    "/home/jolly/code/python/autodoc-agent/docs/examples/python-simple/src/calculator.py"
+  ],
+  "statistics": {
+    "total_files": 24,
+    "total_lines": 7363,
+    "language_distribution": {
+      "python": 24
+    },
+    "average_complexity": 56.47,
+    "max_complexity": 164.9,
+    "circular_dependencies_count": 0,
+    "unused_modules_count": 24,
+    "dependency_stats": {
+      "max_dependencies": 19,
+      "average_dependencies": 8.29,
+      "max_dependents": 0,
+      "average_dependents": 0.0
+    }
+  }
+}

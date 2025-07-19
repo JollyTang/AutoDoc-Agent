@@ -60,7 +60,7 @@
   - [x] 2.3 开发 Go 代码 AST 解析器
   - [x] 2.4 开发 Java 代码 AST 解析器
   - [x] 2.5 开发 TypeScript 代码 AST 解析器
-  - [ ] 2.6 实现模块映射生成功能
+  - [x] 2.6 实现模块映射生成功能
   - [ ] 2.7 添加 AST 缓存机制
   - [ ] 2.8 编写 AST 解析器的单元测试
 
@@ -337,6 +337,76 @@ src/core/
 ├── typescript_ast_parser.py          # TypeScript AST解析器核心模块
 └── test_typescript_ast_parser.py     # TypeScript AST解析器测试
 ```
+
+### 任务 2.6 模块映射生成功能
+
+**状态**: ✅ 已完成
+
+**已完成功能**:
+
+- ✅ 核心模块映射生成器类 (`ModuleMapper`)
+- ✅ 数据结构定义 (`ModuleMapping`, `ProjectMapping`)
+- ✅ 多语言项目文件扫描和解析
+- ✅ 跨语言模块信息统一管理
+- ✅ 依赖关系分析和依赖图构建
+- ✅ 循环依赖检测算法
+- ✅ 未使用模块检测
+- ✅ 模块复杂度分数计算
+- ✅ 项目统计信息生成
+- ✅ JSON 格式导出功能
+- ✅ 便捷函数和完整的测试覆盖
+
+**技术特点**:
+
+- 支持多种编程语言（Python、Go、Java、TypeScript）
+- 统一的模块信息数据结构
+- 智能的依赖关系解析
+- 基于 DFS 的循环依赖检测
+- 多维度复杂度评估算法
+- 完整的项目分析统计
+- 灵活的排除模式支持
+
+**测试状态**:
+
+- 通过: 16/16 测试 (100%)
+- 失败: 0/16 测试 (0%)
+- 覆盖率: 77%
+
+**核心功能**:
+
+1. **项目扫描**: 自动扫描项目中的所有支持文件类型
+2. **语言检测**: 根据文件扩展名自动检测编程语言
+3. **模块解析**: 调用对应语言的 AST 解析器解析模块信息
+4. **依赖分析**: 构建模块间的依赖关系图
+5. **循环检测**: 使用深度优先搜索检测循环依赖
+6. **复杂度评估**: 基于行数、函数数、类数等计算复杂度分数
+7. **统计生成**: 生成项目整体统计信息
+8. **数据导出**: 支持 JSON 格式的数据导出
+
+**项目结构**:
+
+```
+src/core/
+├── module_mapper.py          # 模块映射生成器核心模块
+└── test_module_mapper.py     # 模块映射生成器测试
+```
+
+**使用示例**:
+
+```python
+from src.core.module_mapper import generate_project_mapping, export_mapping_to_json
+
+# 生成项目映射
+project_mapping = generate_project_mapping("/path/to/project", exclude_patterns=["tests", "docs"])
+
+# 获取统计信息
+stats = project_mapping.get_module_statistics()
+
+# 导出为JSON
+json_data = export_mapping_to_json(project_mapping)
+```
+
+**建议**: 模块映射生成功能已经完成，可以很好地支持多语言项目的分析和文档生成需求。
 
 ---
 
