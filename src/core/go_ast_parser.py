@@ -12,6 +12,7 @@ from pathlib import Path
 import logging
 
 from .language_detector import Language as LangType, detect_language
+from .ast_cache import get_global_cache
 
 logger = logging.getLogger(__name__)
 
@@ -77,9 +78,16 @@ class GoASTParser:
     使用tree-sitter库解析Go代码，提取详细的代码结构信息。
     """
     
-    def __init__(self):
-        """初始化Go AST解析器"""
+    def __init__(self, use_cache: bool = True):
+        """
+        初始化Go AST解析器
+        
+        Args:
+            use_cache: 是否使用缓存
+        """
         self.parser = None
+        self.use_cache = use_cache
+        self.cache = get_global_cache() if use_cache else None
         self._init_parser()
     
     def _init_parser(self):
@@ -117,12 +125,26 @@ class GoASTParser:
                 logger.warning(f"文件 {file_path} 不是Go文件")
                 return None
             
+            # 尝试从缓存获取
+            if self.use_cache and self.cache:
+                cached_result = self.cache.get(file_path)
+                if cached_result is not None:
+                    logger.debug(f"从缓存获取Go AST解析结果: {file_path}")
+                    return cached_result
+            
             # 读取文件内容
             with open(file_path, 'r', encoding='utf-8') as f:
                 source_code = f.read()
             
             # 解析AST
-            return self.parse_source(source_code, file_path)
+            module_info = self.parse_source(source_code, file_path)
+            
+            # 缓存结果
+            if self.use_cache and self.cache and module_info:
+                self.cache.set(file_path, module_info)
+                logger.debug(f"缓存Go AST解析结果: {file_path}")
+            
+            return module_info
             
         except Exception as e:
             logger.error(f"解析文件 {file_path} 时出错: {e}")
@@ -554,46 +576,50 @@ class GoASTVisitor:
 
 
 # 便捷函数
-def parse_go_file(file_path: str) -> Optional[GoModuleInfo]:
+def parse_go_file(file_path: str, use_cache: bool = True) -> Optional[GoModuleInfo]:
     """
     解析Go文件（便捷函数）
     
     Args:
         file_path: 文件路径
+        use_cache: 是否使用缓存
         
     Returns:
         模块信息
     """
-    parser = GoASTParser()
+    parser = GoASTParser(use_cache=use_cache)
     return parser.parse_file(file_path)
 
 
-def parse_go_source(source_code: str, file_path: str = "<string>") -> Optional[GoModuleInfo]:
+def parse_go_source(source_code: str, file_path: str = "<string>", use_cache: bool = True) -> Optional[GoModuleInfo]:
     """
     解析Go源代码（便捷函数）
     
     Args:
         source_code: 源代码字符串
         file_path: 文件路径
+        use_cache: 是否使用缓存
         
     Returns:
         模块信息
     """
-    parser = GoASTParser()
+    parser = GoASTParser(use_cache=use_cache)
     return parser.parse_source(source_code, file_path)
 
 
 def parse_go_directory(directory: str, 
-                      exclude_patterns: Optional[List[str]] = None) -> Dict[str, GoModuleInfo]:
+                      exclude_patterns: Optional[List[str]] = None,
+                      use_cache: bool = True) -> Dict[str, GoModuleInfo]:
     """
     解析目录中的所有Go文件（便捷函数）
     
     Args:
         directory: 目录路径
         exclude_patterns: 排除的文件模式列表
+        use_cache: 是否使用缓存
         
     Returns:
         文件路径到模块信息的映射
     """
-    parser = GoASTParser()
+    parser = GoASTParser(use_cache=use_cache)
     return parser.parse_directory(directory, exclude_patterns) 

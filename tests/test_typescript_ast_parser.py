@@ -1,7 +1,7 @@
 """
-TypeScript AST解析器的单元测试
+TypeScript AST 解析器的单元测试
 
-测试TypeScript代码解析的各种场景，包括接口、类、函数、类型定义等。
+测试 TypeScript 代码的 AST 解析功能。
 """
 
 import pytest
@@ -10,13 +10,13 @@ import os
 from pathlib import Path
 from typing import Optional
 
-from .typescript_ast_parser import (
+from src.core.typescript_ast_parser import (
     TypeScriptASTParser, TypeScriptModuleInfo, TypeScriptClassInfo, 
     TypeScriptInterfaceInfo, TypeScriptFunctionInfo, TypeScriptPropertyInfo,
     TypeScriptTypeInfo, TypeScriptEnumInfo,
     parse_typescript_file, parse_typescript_source, parse_typescript_directory
 )
-from .language_detector import Language
+from src.core.language_detector import Language
 
 
 class TestTypeScriptASTParser:

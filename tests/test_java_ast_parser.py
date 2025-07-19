@@ -1,7 +1,7 @@
 """
-Java AST解析器的单元测试
+Java AST 解析器的单元测试
 
-测试Java代码解析的各种场景，包括类、接口、枚举、方法、字段等。
+测试 Java 代码的 AST 解析功能。
 """
 
 import pytest
@@ -10,11 +10,11 @@ import os
 from pathlib import Path
 from typing import Optional
 
-from .java_ast_parser import (
+from src.core.java_ast_parser import (
     JavaASTParser, JavaModuleInfo, JavaClassInfo, JavaMethodInfo, JavaFieldInfo,
     parse_java_file, parse_java_source, parse_java_directory
 )
-from .language_detector import Language
+from src.core.language_detector import Language
 
 
 class TestJavaASTParser:

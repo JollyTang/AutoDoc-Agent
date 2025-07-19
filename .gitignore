@@ -143,6 +143,7 @@ cython_debug/
 
 # AutoDoc Agent specific
 .autodoc/
+.autodoc_cache/
 autodoc_cache/
 *.autodoc
 bandit-report.json 

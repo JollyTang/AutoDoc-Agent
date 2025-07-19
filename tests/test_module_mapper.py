@@ -1,7 +1,7 @@
 """
-模块映射生成功能的单元测试
+模块映射生成器的单元测试
 
-测试模块映射生成的各种场景，包括多语言项目分析、依赖关系分析等。
+测试模块映射生成功能的各种场景。
 """
 
 import pytest
@@ -11,11 +11,11 @@ import json
 from pathlib import Path
 from typing import Optional
 
-from .module_mapper import (
+from src.core.module_mapper import (
     ModuleMapper, ModuleMapping, ProjectMapping,
     generate_project_mapping, export_mapping_to_json
 )
-from .language_detector import Language
+from src.core.language_detector import Language
 
 
 class TestModuleMapper:
