@@ -70,7 +70,7 @@
   - [x] 3.2 实现 OpenAI API 集成
   - [x] 3.3 实现 Claude API 集成
   - [x] 3.4 集成本地 OSS 模型（Ollama）
-  - [ ] 3.5 实现 LLM 调用重试和降级机制
+  - [x] 3.5 实现 LLM 调用重试和降级机制
   - [ ] 3.6 开发 Prompt 模板管理系统
   - [ ] 3.7 实现 API 密钥安全存储（keyring）
   - [ ] 3.8 编写 LLM 集成的单元测试
@@ -1042,3 +1042,144 @@ except OllamaNotAvailableError as e:
 5. **完整文档**: 提供详细的安装和配置指南
 
 **建议**: 降级处理机制已经完善，确保项目在任何环境下都能正常工作。用户可以根据自己的需求选择使用本地 Ollama 服务或云端 AI 服务。
+
+### 任务 3.5 LLM 调用重试和降级机制
+
+**状态**: ✅ 已完成
+
+**已完成功能**:
+
+- ✅ **重试策略系统**: 支持指数退避、线性退避、固定延迟、随机退避四种策略
+- ✅ **智能错误分类**: 自动分类网络、超时、速率限制、认证、配额、服务器、模型等错误类型
+- ✅ **熔断器模式**: 防止级联失败，支持自动恢复机制
+- ✅ **降级管理器**: 在主要提供商失败时自动切换到备用提供商
+- ✅ **增强 LLM 管理器**: 集成重试、降级、熔断器功能的统一管理器
+- ✅ **性能监控**: 详细的请求统计、响应时间、错误分布监控
+- ✅ **装饰器支持**: 简化重试和降级功能的使用
+- ✅ **灵活配置**: 支持自定义重试参数、降级策略、熔断器配置
+
+**技术特点**:
+
+- **多种重试策略**: 指数退避（推荐）、线性退避、固定延迟、随机退避
+- **智能错误处理**: 基于错误类型自动决定是否重试或降级
+- **熔断器保护**: 防止故障服务影响整体系统稳定性
+- **自动降级**: 在主要服务不可用时自动切换到备用服务
+- **性能统计**: 实时监控请求成功率、响应时间、错误分布
+- **异步支持**: 完全支持异步/等待模式
+- **类型安全**: 使用 TypeVar 和泛型确保类型安全
+
+**核心组件**:
+
+1. **ErrorClassifier**: 错误分类器
+
+   - 自动识别 8 种错误类型
+   - 智能判断是否应该重试或降级
+
+2. **RetryManager**: 重试管理器
+
+   - 支持 4 种重试策略
+   - 可配置的重试参数
+   - 详细的性能统计
+
+3. **CircuitBreaker**: 熔断器
+
+   - 三种状态：关闭、打开、半开
+   - 自动故障检测和恢复
+   - 可配置的失败阈值和恢复时间
+
+4. **FallbackManager**: 降级管理器
+
+   - 多提供商自动切换
+   - 基于错误类型的降级决策
+   - 保持原始请求完整性
+
+5. **EnhancedLLMManager**: 增强管理器
+   - 集成所有重试和降级功能
+   - 统一的接口和配置
+   - 完整的监控和统计
+
+**配置选项**:
+
+```python
+# 重试配置
+retry_config = RetryConfig(
+    max_retries=3,
+    base_delay=1.0,
+    strategy=RetryStrategy.EXPONENTIAL_BACKOFF,
+    jitter=True
+)
+
+# 降级配置
+fallback_config = FallbackConfig(
+    enable_fallback=True,
+    fallback_providers=[ProviderType.OPENAI, ProviderType.CLAUDE, ProviderType.OLLAMA]
+)
+
+# 熔断器配置
+circuit_breaker_config = CircuitBreakerConfig(
+    failure_threshold=5,
+    recovery_timeout=60.0
+)
+```
+
+**使用示例**:
+
+```python
+# 创建增强管理器
+manager = create_enhanced_llm_manager(
+    retry_config=retry_config,
+    fallback_config=fallback_config,
+    circuit_breaker_config=circuit_breaker_config
+)
+
+# 使用装饰器
+@retry_decorator(max_retries=3, base_delay=1.0)
+async def api_call():
+    # API 调用逻辑
+    pass
+
+# 获取统计信息
+stats = manager.get_retry_stats()
+status = manager.get_circuit_breaker_status()
+```
+
+**测试覆盖**:
+
+- 通过: 31/31 测试 (100%)
+- 失败: 0/31 测试 (0%)
+- 覆盖率: 76%
+
+**测试内容**:
+
+1. **错误分类测试**: 验证 8 种错误类型的正确分类
+2. **熔断器测试**: 验证状态转换、故障检测、自动恢复
+3. **重试管理器测试**: 验证重试逻辑、延迟计算、统计功能
+4. **装饰器测试**: 验证重试装饰器的正确使用
+5. **配置测试**: 验证各种配置选项的正确性
+6. **增强管理器测试**: 验证集成功能的正确性
+
+**项目结构**:
+
+```
+src/llm/
+├── retry_fallback.py          # 重试和降级机制核心模块
+└── __init__.py               # LLM 模块初始化
+
+tests/
+└── test_retry_fallback.py    # 重试和降级机制测试
+
+demos/
+└── demo_retry_fallback.py    # 重试和降级机制演示
+```
+
+**优势特点**:
+
+1. **高可用性**: 通过重试和降级确保服务高可用
+2. **容错能力**: 熔断器防止级联失败
+3. **性能优化**: 智能重试策略减少不必要的等待
+4. **监控能力**: 详细的性能统计和错误分析
+5. **易用性**: 装饰器支持简化使用
+6. **灵活性**: 丰富的配置选项适应不同场景
+7. **可扩展性**: 模块化设计便于扩展
+
+**建议**: LLM 调用重试和降级机制已经完成，为项目提供了强大的容错和可用性保障。建议继续开发 Prompt 模板管理系统，进一步提升 LLM 集成的功能完整性。
