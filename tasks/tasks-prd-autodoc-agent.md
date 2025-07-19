@@ -9,8 +9,10 @@
 - `src/cli/__init__.py` - CLI 工具的主入口模块
 - `src/cli/commands.py` - CLI 命令实现（init, update, help）
 - `src/cli/commands.test.py` - CLI 命令的单元测试
-- `src/core/ast_parser.py` - AST 解析器核心模块
-- `src/core/ast_parser.test.py` - AST 解析器的单元测试
+- `src/core/ast_parser.py` - Python AST 解析器核心模块
+- `src/core/go_ast_parser.py` - Go AST 解析器核心模块
+- `src/core/ast_parser.test.py` - Python AST 解析器的单元测试
+- `src/core/go_ast_parser.test.py` - Go AST 解析器的单元测试
 - `src/core/language_detector.py` - 编程语言检测模块
 - `src/core/language_detector.test.py` - 语言检测的单元测试
 - `src/core/git_handler.py` - Git 操作处理模块
@@ -43,19 +45,19 @@
 
 ## 任务列表
 
-- [ ] 1.0 项目脚手架搭建
+- [x] 1.0 项目脚手架搭建
 
-  - [ ] 1.1 创建项目目录结构和基础文件
-  - [ ] 1.2 配置 `pyproject.toml` 和依赖管理
-  - [ ] 1.3 设置开发环境和工具配置
-  - [ ] 1.4 创建基础配置文件模板
-  - [ ] 1.5 编写项目 README 和文档结构
+  - [x] 1.1 创建项目目录结构和基础文件
+  - [x] 1.2 配置 `pyproject.toml` 和依赖管理
+  - [x] 1.3 设置开发环境和工具配置
+  - [x] 1.4 创建基础配置文件模板
+  - [x] 1.5 编写项目 README 和文档结构
 
 - [ ] 2.0 AST 解析器开发
 
-  - [ ] 2.1 实现编程语言检测模块
+  - [x] 2.1 实现编程语言检测模块
   - [x] 2.2 开发 Python 代码 AST 解析器（使用 libcst）
-  - [ ] 2.3 开发 Go 代码 AST 解析器
+  - [x] 2.3 开发 Go 代码 AST 解析器
   - [ ] 2.4 开发 Java 代码 AST 解析器
   - [ ] 2.5 开发 TypeScript 代码 AST 解析器
   - [ ] 2.6 实现模块映射生成功能
@@ -117,6 +119,86 @@
 ---
 
 ## 待解决问题记录
+
+### 任务 1.0 项目脚手架搭建
+
+**状态**: ✅ 已完成
+
+**已完成功能**:
+
+- ✅ 项目目录结构创建完整
+- ✅ `pyproject.toml` 配置完善，包含所有必要依赖
+- ✅ 开发环境工具配置（black, isort, flake8, mypy, pre-commit）
+- ✅ 基础配置文件模板 (`src/config/default_config.yaml`)
+- ✅ 项目 README 文档结构完整
+- ✅ 许可证文件 (MIT)
+- ✅ 贡献指南 (CONTRIBUTING.md)
+- ✅ Git 忽略文件配置
+- ✅ 测试框架配置 (pytest)
+- ✅ 代码覆盖率配置
+
+**项目结构**:
+
+```
+autodoc-agent/
+├── src/
+│   ├── cli/           # CLI工具
+│   ├── core/          # 核心功能
+│   ├── llm/           # LLM集成
+│   ├── docs/          # 文档生成
+│   ├── utils/         # 工具函数
+│   ├── config/        # 配置文件
+│   └── templates/     # 模板文件
+├── tests/             # 测试文件
+├── docs/              # 项目文档
+├── tasks/             # 任务文档
+├── pyproject.toml     # 项目配置
+├── README.md          # 项目说明
+├── LICENSE            # 许可证
+├── CONTRIBUTING.md    # 贡献指南
+├── .gitignore         # Git忽略文件
+└── .pre-commit-config.yaml  # 代码质量检查
+```
+
+### 任务 2.3 Go 代码 AST 解析器
+
+**状态**: ✅ 已完成
+
+**已完成功能**:
+
+- ✅ 核心 Go AST 解析器类 (`GoASTParser`)
+- ✅ 数据结构定义 (`GoFunctionInfo`, `GoStructInfo`, `GoInterfaceInfo`, `GoModuleInfo`)
+- ✅ 备用正则表达式解析方法（当 tree-sitter 不可用时）
+- ✅ 文件、源代码、目录解析功能
+- ✅ 包声明、导入语句解析
+- ✅ 函数、方法、结构体、接口解析
+- ✅ 文档字符串、参数、返回类型解析
+- ✅ 变量和常量解析
+- ✅ 方法到结构体的正确关联
+- ✅ 便捷函数和完整的测试覆盖
+
+**技术特点**:
+
+- 使用 tree-sitter 作为主要解析方法
+- 提供正则表达式作为备用解析方法
+- 支持 Go 特有的语言特性（接收者、结构体方法等）
+- 正确处理 Go 的导出规则（大写字母开头）
+- 支持多种导入语法（单行和块导入）
+
+**测试状态**:
+
+- 通过: 18/18 测试
+- 失败: 0/18 测试
+- 覆盖率: ~62%
+
+**项目结构**:
+
+```
+src/core/
+├── go_ast_parser.py          # Go AST解析器核心模块
+└── tests/
+    └── test_go_ast_parser.py # Go AST解析器测试
+```
 
 ### 任务 2.2 Python AST 解析器优化问题
 
